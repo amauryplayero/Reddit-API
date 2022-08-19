@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 
 export default function HandleInfiniteLoop(lastNameQuery) {
   const [loading, setLoading] = useState(false)
-  const[error, setError] = useState(false)
-  const [additionalPosts, setAdditionalPosts] = useState([])
+  const [error, setError] = useState(false)
+  const [posts, setPosts] = useState([])
 
 
 
@@ -18,7 +18,7 @@ export default function HandleInfiniteLoop(lastNameQuery) {
         url:`https://www.reddit.com/r/aww/.json?after=${lastNameQuery}`,
         cancelToken: new axios.CancelToken(c=> cancel = c)
         }).then(res => {
-          setAdditionalPosts(prevAdditionalPosts=> ([...prevAdditionalPosts, ...res.data.data.children]))
+          setPosts(prevPosts=> ([...prevPosts, ...res.data.data.children]))
           })
             //  setPosts(prevState=>([...posts, ...res.data.data.children]))   
     
@@ -27,5 +27,5 @@ export default function HandleInfiniteLoop(lastNameQuery) {
     },[lastNameQuery])
     // console.log(additionalPosts)
 
-  return {loading, error, additionalPosts}
+  return {loading, error, posts}
 }

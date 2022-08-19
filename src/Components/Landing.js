@@ -12,7 +12,7 @@ export default function Landing() {
     const page = useRef(0)
 
     const {
-        additionalPosts,
+        posts,
         loading,
         error
     
@@ -38,12 +38,12 @@ export default function Landing() {
         // When user touches bottom
         
         
-        if(clientHeight + scrollTop >= scrollHeight && additionalPosts!=undefined){
+        if(clientHeight + scrollTop >= scrollHeight && posts!=undefined){
             // console.log('bottom')
             if(page<1){
-            setLastNameQuery(additionalPosts[additionalPosts.length-1].data.name)
+            setLastNameQuery(posts[posts.length-1].data.name)
             }else{
-                setLastNameQuery(additionalPosts[additionalPosts.length-1].data.name)
+                setLastNameQuery(posts[posts.length-1].data.name)
                 // setPosts(additionalPosts)
                 loadingLogo = <>
                 </>
@@ -54,7 +54,7 @@ export default function Landing() {
         if(loading){
             loadingLogo=<span>loading</span>
         }
-            console.log(additionalPosts)
+            console.log(posts)
             
             // HandleInfiniteLoop(lastNameQuery)
             let link = 'https://www.reddit.com/'
@@ -66,7 +66,7 @@ export default function Landing() {
                 <>
     {/* <button onClick={()=>{performInitialCall()}}></button> */}
     <div id="mainDiv" onScroll={e=>handleScroll(e)}>
-        <MapThroughPosts  posts={additionalPosts}/>
+        <MapThroughPosts  posts={posts}/>
     </div>
     {loadingLogo}
     </>
