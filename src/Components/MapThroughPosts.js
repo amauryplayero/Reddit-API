@@ -15,12 +15,14 @@ export default function MapThroughPosts({posts}) {
             console.log()
             let info = <>
                     <div className="picNameAndSubredditContainer">
-                        <img width={"120px"} src={e.data.thumbnail}></img>
+                        <div className="thumbnailContainer">
+                            <img width={"120px"} src={e.data.thumbnail}></img>
+                        </div>
                         <span>{singlePostData.author}</span>
-                        &nbsp;&nbsp;
+                    <a className="linkText"href={`https://www.reddit.com`+singlePostData.permalink} target="_blank">{singlePostData.title}</a>
+                       
                         <span className="subredditNameText">{singlePostData.subreddit_name_prefixed}</span>
                     </div>
-                    <a className="linkText"href={`https://www.reddit.com`+singlePostData.permalink} target="_blank">{singlePostData.title}</a>
                     </>
 
             // console.log(singlePostData)
@@ -85,6 +87,7 @@ export default function MapThroughPosts({posts}) {
                             {/* <img width={"90px"} src={e.data.thumbnail}></img> */}
                             {singlePostData.author}//
                             {singlePostData.post_hint}
+                            {info}
                         </div>
     
                         </>
