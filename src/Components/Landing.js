@@ -25,7 +25,7 @@ export default function Landing() {
         LOADING
         </>
     } else {
-        loading = <>
+        loadingLogo = <>
         </>
     }
 
