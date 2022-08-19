@@ -6,19 +6,28 @@ import HandleInfiniteLoop from './InfiniteLoop'
 
 export default function Landing() {
 
+    let loadingLogo
     const arrayWithNewPosts = useRef([])
     const countersForEffect = useRef(0)
     const [lastNameQuery, setLastNameQuery] = useState("")
     const page = useRef(0)
-
+    
     const {
         posts,
         loading,
         error
-    
+        
     } = HandleInfiniteLoop(lastNameQuery)
-
-    let loadingLogo
+    
+    
+    if(loading){
+        loadingLogo = <>
+        LOADING
+        </>
+    } else {
+        loading = <>
+        </>
+    }
 
     HandleInfiniteLoop(lastNameQuery)
 
@@ -27,48 +36,27 @@ export default function Landing() {
     },[])
     
 
-
-
     const handleScroll = (e) =>{
         
         const scrollHeight = e.target.scrollingElement.scrollHeight
         const scrollTop = e.target.scrollingElement.scrollTop
         const clientHeight = e.target.scrollingElement.clientHeight
-        // const observer = useRef
-        // When user touches bottom
-        
-        
+        // When user reaches bottom
         if(clientHeight + scrollTop >= scrollHeight && posts!=undefined){
-            // console.log('bottom')
-            if(page<1){
             setLastNameQuery(posts[posts.length-1].data.name)
-            }else{
-                setLastNameQuery(posts[posts.length-1].data.name)
-                // setPosts(additionalPosts)
-                loadingLogo = <>
-                </>
-            }
-                }  
-            }
-            
-        if(loading){
-            loadingLogo=<span>loading</span>
+            }  
         }
-            console.log(posts)
+
+        window.addEventListener('scroll',(e)=>{handleScroll(e)})
+ 
             
-            // HandleInfiniteLoop(lastNameQuery)
-            let link = 'https://www.reddit.com/'
-            window.addEventListener('scroll',(e)=>{handleScroll(e)})
-            
-            
-            
-            return (
-                <>
-    {/* <button onClick={()=>{performInitialCall()}}></button> */}
-    <div id="mainDiv" onScroll={e=>handleScroll(e)}>
-        <MapThroughPosts  posts={posts}/>
-    </div>
-    {loadingLogo}
-    </>
+        return (
+            <>
+                {/* <button onClick={()=>{performInitialCall()}}></button> */}
+                <div id="mainDiv" onScroll={e=>handleScroll(e)}>
+                    <MapThroughPosts  posts={posts}/>
+                </div>
+                {loadingLogo}
+            </>
   )
 }
