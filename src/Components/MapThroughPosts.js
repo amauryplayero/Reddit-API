@@ -1,25 +1,28 @@
 import React , {useEffect}from 'react'
+import {handleScroll} from './Landing'
 
 
 export default function MapThroughPosts({posts}) {
-    const handleScroll =(e) =>{
-        // console.log(e.target.scrollHeight, e.target.clientHeight)
-        console.log(e)
 
-        // const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
 
-    }
 
-  
-
-   
-   
     if(posts!=undefined){
-        // console.log(posts.data.data.children)
-        let postsArray = posts.data.data.children
+        let postsArray = posts
+        
 
         let mappedPosts = postsArray.map((e)=>{
             let singlePostData = e.data
+            console.log()
+            let info = <>
+                    <div className="picNameAndSubredditContainer">
+                        <img width={"120px"} src={e.data.thumbnail}></img>
+                        <span>{singlePostData.author}</span>
+                        &nbsp;&nbsp;
+                        <span className="subredditNameText">{singlePostData.subreddit_name_prefixed}</span>
+                    </div>
+                    <a className="linkText"href={`https://www.reddit.com`+singlePostData.permalink} target="_blank">{singlePostData.title}</a>
+                    </>
+
             // console.log(singlePostData)
             switch(singlePostData.post_hint) {
                 // if post contains an image
@@ -27,10 +30,10 @@ export default function MapThroughPosts({posts}) {
                     return(
                         <>
                         <div className="postContainer">
-                            <img width={"90px"} src={e.data.url}></img>
-                         
-                            {singlePostData.author}
-                        <u>image</u>
+                            <div className="titleThumbnailNameContainer">
+                                {info}
+                            </div>
+
                         </div>
                         </>
                        )
@@ -39,8 +42,10 @@ export default function MapThroughPosts({posts}) {
                 return(
                     <>
                     <div className="postContainer">
-                        <img width={"90px"} src={e.data.url}></img>
-                        {singlePostData.author}
+                        
+                        <div className="titleThumbnailNameContainer">
+                                {info}
+                        </div>
                         
                         <u>video</u>
                     </div>
@@ -51,10 +56,10 @@ export default function MapThroughPosts({posts}) {
                 return(
                     <>
                     <div className="postContainer">
-                        <img width={"90px"} src={e.data.thumbnail}></img>
-                        {singlePostData.author}
-                     
-                        <u>link</u>
+                      
+                        <div className="titleThumbnailNameContainer">
+                                {info}
+                        </div>
                     </div>
 
                     </>
@@ -64,9 +69,10 @@ export default function MapThroughPosts({posts}) {
                  return(
                     <>
                     <div className="postContainer">
-                        <img width={"90px"} src={e.data.thumbnail}></img>
-                        {singlePostData.author}
-                        
+                      
+                        <div className="titleThumbnailNameContainer">
+                                {info}
+                        </div>
                     </div>
 
                     </>
@@ -92,18 +98,13 @@ export default function MapThroughPosts({posts}) {
         return (
             <>
             <div>
-          {/* <div>MapThroughPosts</div> */}
           {mappedPosts}
           </div>
           </>
         )
     }
 
-    return(
-        <>
-        'no posts'
-        </>
-    )
+ 
 
 
 
