@@ -9,6 +9,7 @@ export default function Landing() {
     const [posts, setPosts] = useState(undefined)
     const arrayWithNewPosts = useRef([])
     const countersForEffect = useRef(0)
+    const loading = useRef(false)
   
 
     let loadingLogo
@@ -47,10 +48,6 @@ export default function Landing() {
     
     console.log(posts)
 
-    
-
-
-
     const handleScroll = (e) =>{
        
         const scrollHeight = e.target.scrollingElement.scrollHeight
@@ -58,19 +55,24 @@ export default function Landing() {
         const clientHeight = e.target.scrollingElement.clientHeight
         
         // When user touches bottom
+        loading.current=true
+        
         if(clientHeight + scrollTop >= scrollHeight && posts!=undefined){
             console.log('bottom')
             let lastNameQuery = posts[posts.length-1].data.name
 
-         
+            if(loading.current===true){
+           
                 axios.get(`https://www.reddit.com/r/aww/.json?after=${lastNameQuery}`).then(
                     (res) => {
-
+                        
                         setPosts(prevState=>([...prevState, ...res.data.data.children]))
-                 
+                        loading.current= false
+                        
                     }
                     )
-            
+         
+                }
 
         }  
     }
