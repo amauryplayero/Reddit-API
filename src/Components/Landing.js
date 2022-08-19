@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import MapThroughPosts from './MapThroughPosts'
 
@@ -12,6 +12,26 @@ export default function Landing() {
     //     password : 'Musica989898'
     // };
 
+    const handleScroll = (e) =>{
+        // console.log(e.target.scrollingElement.scrollHeight)
+        // console.log(e)
+        const scrollHeight = e.target.scrollingElement.scrollHeight
+        const scrollTop = e.target.scrollingElement.scrollTop
+        const clientHeight = e.target.scrollingElement.clientHeight
+
+        if(clientHeight + scrollTop === scrollHeight){
+            console.log('reached bottom')
+        }
+        // const bottom = e.target.scrollingElement.scrollHeight - 
+        
+
+        
+    }
+
+    window.addEventListener('scroll',(e)=>{handleScroll(e)})
+    // useEffect(()=>{
+    // },[])
+
     let link = 'https://www.reddit.com/'
 
     const performCall = () =>{
@@ -20,12 +40,16 @@ export default function Landing() {
         )
     }
 
+   
+
   return (
       <>
-    <div>Landing
+     
     <button onClick={()=>performCall()}>perform call</button>
+    <div id="mainDiv" onScroll={e=>handleScroll(e)}>Landing
     <MapThroughPosts  posts={posts}/>
     </div>
+    
     </>
   )
 }

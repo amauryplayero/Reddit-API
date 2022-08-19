@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  border: blue solid;
+  overflow-y:scroll;
 }
 
 .App-logo {
@@ -41,4 +43,13 @@
   border: red solid;
   width: 350px;
   margin-bottom: 30px;
+}
+
+#mainDiv{
+  border: blue solid;
+  overflow-y:scroll;
+}
+
+#scrollableDiv{
+  overflow-y: auto;
 }

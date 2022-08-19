@@ -1,6 +1,17 @@
-import React from 'react'
+import React , {useEffect}from 'react'
+
 
 export default function MapThroughPosts({posts}) {
+    const handleScroll =(e) =>{
+        // console.log(e.target.scrollHeight, e.target.clientHeight)
+        console.log(e)
+
+        // const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+
+    }
+
+  
+
    
    
     if(posts!=undefined){
@@ -9,7 +20,7 @@ export default function MapThroughPosts({posts}) {
 
         let mappedPosts = postsArray.map((e)=>{
             let singlePostData = e.data
-            console.log(singlePostData)
+            // console.log(singlePostData)
             switch(singlePostData.post_hint) {
                 // if post contains an image
                 case "image":
@@ -68,8 +79,6 @@ export default function MapThroughPosts({posts}) {
                             {/* <img width={"90px"} src={e.data.thumbnail}></img> */}
                             {singlePostData.author}//
                             {singlePostData.post_hint}
-                          
-                            
                         </div>
     
                         </>
@@ -82,8 +91,10 @@ export default function MapThroughPosts({posts}) {
         })
         return (
             <>
+            <div>
           {/* <div>MapThroughPosts</div> */}
           {mappedPosts}
+          </div>
           </>
         )
     }
@@ -91,7 +102,6 @@ export default function MapThroughPosts({posts}) {
     return(
         <>
         'no posts'
-        <img src={`https://external-preview.redd.it/Oj_yJrrdWIHHI3XBL6P9zaB_6wBbUUg9UFYvQP9raqI.jpg?auto=webp&amp;s=1b9779c375b6561908042c39980fc74601a72a32`}></img>
         </>
     )
 
