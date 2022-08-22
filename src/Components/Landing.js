@@ -10,7 +10,6 @@ export default function Landing() {
     const {
         posts,
         loading,
-        // error
         
     } = HandleInfiniteLoop(lastNameQuery)
     
@@ -25,6 +24,7 @@ export default function Landing() {
     }
 
     HandleInfiniteLoop(lastNameQuery)
+    
 
     useEffect(()=>{
 
@@ -48,7 +48,6 @@ export default function Landing() {
             
         return (
             <>
-                {/* <button onClick={()=>{performInitialCall()}}></button> */}
                 <div id="mainDiv" onScroll={e=>handleScroll(e)}>
                     <MapThroughPosts  posts={posts}/>
                 </div>
