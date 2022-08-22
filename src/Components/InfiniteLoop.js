@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useState} from 'react'
 
 export default function HandleInfiniteLoop(lastNameQuery) {
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
 
-  let cancel
+  let cancel 
   useEffect(()=>{
     setLoading(true)
   
@@ -15,6 +15,7 @@ export default function HandleInfiniteLoop(lastNameQuery) {
         cancelToken: new axios.CancelToken(c=> cancel = c)
         }).then(res => {
           setPosts(prevPosts=> ([...prevPosts, ...res.data.data.children]))
+          setLoading(false)
         }).catch(e => {
           if(axios.isCancel(e)) return
         })
@@ -23,7 +24,5 @@ export default function HandleInfiniteLoop(lastNameQuery) {
   
     },[lastNameQuery])
  
-
-
   return {loading, posts}
 }

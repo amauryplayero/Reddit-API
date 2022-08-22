@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import MapThroughPosts from './MapThroughPosts'
 import HandleInfiniteLoop from './InfiniteLoop'
 
@@ -25,10 +25,6 @@ export default function Landing() {
 
     HandleInfiniteLoop(lastNameQuery)
     
-
-    useEffect(()=>{
-
-    },[])
     
 
     const handleScroll = (e) =>{
@@ -37,8 +33,9 @@ export default function Landing() {
         const scrollTop = e.target.scrollingElement.scrollTop
         const clientHeight = e.target.scrollingElement.clientHeight
         // When user reaches bottom
-        if(clientHeight + scrollTop >= scrollHeight && posts!==undefined && posts[posts.length-1]!== undefined){
-            setLastNameQuery(posts[posts.length-1].data.name)
+        const lastPostOnLastQuery = posts[posts.length-1]
+        if(clientHeight + scrollTop >= scrollHeight && posts!==undefined && lastPostOnLastQuery!== undefined){
+            setLastNameQuery(lastPostOnLastQuery.data.name)
         }
         
         }
