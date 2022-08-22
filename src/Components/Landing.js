@@ -38,7 +38,6 @@ export default function Landing() {
         const clientHeight = e.target.scrollingElement.clientHeight
         // When user reaches bottom
         if(clientHeight + scrollTop >= scrollHeight && posts!==undefined && posts[posts.length-1]!== undefined){
-            console.log(posts[posts.length-1])
             setLastNameQuery(posts[posts.length-1].data.name)
         }
         
