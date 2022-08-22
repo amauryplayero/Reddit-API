@@ -1,21 +1,16 @@
-import React, {useState, useEffect, useRef} from 'react'
-import axios from 'axios'
+import React, {useState, useEffect} from 'react'
 import MapThroughPosts from './MapThroughPosts'
-import { createConstructor } from 'typescript'
 import HandleInfiniteLoop from './InfiniteLoop'
 
 export default function Landing() {
 
     let loadingLogo
-    const arrayWithNewPosts = useRef([])
-    const countersForEffect = useRef(0)
     const [lastNameQuery, setLastNameQuery] = useState("")
-    const page = useRef(0)
     
     const {
         posts,
         loading,
-        error
+        // error
         
     } = HandleInfiniteLoop(lastNameQuery)
     
@@ -42,9 +37,11 @@ export default function Landing() {
         const scrollTop = e.target.scrollingElement.scrollTop
         const clientHeight = e.target.scrollingElement.clientHeight
         // When user reaches bottom
-        if(clientHeight + scrollTop >= scrollHeight && posts!=undefined){
+        if(clientHeight + scrollTop >= scrollHeight && posts!==undefined && posts[posts.length-1]!== undefined){
+            console.log(posts[posts.length-1])
             setLastNameQuery(posts[posts.length-1].data.name)
-            }  
+        }
+        
         }
 
         window.addEventListener('scroll',(e)=>{handleScroll(e)})
