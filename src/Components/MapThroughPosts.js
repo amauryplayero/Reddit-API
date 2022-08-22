@@ -1,7 +1,4 @@
-import React , {useEffect}from 'react'
-import {handleScroll} from './Landing'
-import InfiniteLoop from './InfiniteLoop'
-
+import React from 'react'
 
 export default function MapThroughPosts({posts}) {
 
